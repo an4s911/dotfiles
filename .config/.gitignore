@@ -1,0 +1,26 @@
+# Ignore everything
+/*
+
+# Except
+
+# Directories
+!/alacritty/
+!/gdb/
+!/gh/
+!/gtk*/
+!/i3*/
+!/nitrogen/
+!/uplse/
+!/sublime-text-3/
+!/virtualenv/
+!/VSCodium/
+!/X11
+!/dunst/
+!/fontconfig/
+!/picom.conf
+!/polybar
+!/rofi/
+!/xfce4/
+
+# Files
+!/.gitignore

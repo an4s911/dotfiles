@@ -1,0 +1,10 @@
+# Ignore Everything 
+/*
+
+# Except
+# Directories
+!/User/
+
+# Files
+!/.gitignore
+!/product.json*

@@ -1,0 +1,84 @@
+#!/usr/bin/python
+
+from os import stat
+from i3pystatus import Status
+
+class myStatus(Status):
+    def register(self, module, *args, **kwargs):
+        if (module == "mic"):
+            return [{"full_text": "Hello"}]
+        else:
+            return super().register(module, *args, **kwargs)
+    
+
+
+status = Status()
+
+status.register("clock",
+    format=" %T"
+)
+
+status.register("clock",
+    format=" %a %d %b"
+)
+
+status.register(
+    'bluetooth',
+    show_disconnected=False,
+    format="{name}"
+)
+
+status.register(
+    "pulseaudio",
+    format=" {volume}%",
+    format_muted=" {volume}%",
+    vertical_bar_width=1,
+)
+
+status.register(
+    "mem",
+    format=" {percent_used_mem:.1f}%",
+    interval=5,
+)
+
+# status.register(
+#     "xkblayout",
+#     layouts=["us", "ar"]
+# )
+
+status.register(
+    "disk",
+    path="/",
+    format=" {free}"
+)
+
+status.register(
+    "battery",
+    interval = 5,
+    format=" {status} {percentage_design:.1f}% {remaining}",
+    alert=True,
+    status={
+        'CHR': '',
+        'DIS': '',
+        'FULL': '',
+    },
+)
+
+status.register(
+    "uptime",
+    format=" {hours}:{mins}hrs",
+    interval=60
+)
+
+for interface, symbol in {"wlp3s0": "", "enp2s0": "", "ap0": ""}.items():
+    status.register(
+        "network",
+        format_up=symbol + " {bytes_recv}KB/s",
+        format_down=symbol + ": DOWN",
+        interface=interface,
+        on_rightclick="",
+        on_upscroll="",
+        on_downscroll="",
+    )
+
+status.run()

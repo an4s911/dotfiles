@@ -1,0 +1,10 @@
+# Ignore Everything
+/*
+
+# Except
+# Directories
+
+# Files
+!/keybindings.json
+!/settings.json
+!/.gitignore
