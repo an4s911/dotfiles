@@ -330,8 +330,8 @@ bindsym $mod+f exec /usr/bin/firefox
 bindsym $mod+e exec /usr/bin/thunar
 bindsym $mod+c exec /usr/bin/codium
 bindsym Print exec "maim ~/Pictures/screenshots/$(date +%Y-%m-%d-%T)-screenshot.png -q"
-bindsym Shift+Print exec "maim -s ~/Pictures/screenshots/$(date +%Y-%m-%d-%T)-screenshot.png -q"
-bindsym Ctrl+Print exec xfce4-screenshooter
+bindsym Ctrl+Print exec "maim -s ~/Pictures/screenshots/$(date +%Y-%m-%d-%T)-screenshot.png -q"
+bindsym Shift+Print exec xfce4-screenshooter
 # bindsym Print exec "scrot ~/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png"
 
 # Power Profiles menu switcher (rofi)
@@ -486,7 +486,7 @@ exec --no-startup-id xfce4-clipman
 
 # An application to temporarily prevent the activation of both 
 # the screen saver and the "sleep" powersaving mode
-exec --no-startup-id caffeine
+# exec --no-startup-id caffeine
 
 ##################
 # floating rules #
@@ -507,6 +507,9 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
+
+# Floating windows maximum size
+floating_maximum_size 1000 x 760
 
 ######################################
 # color settings for bar and windows #

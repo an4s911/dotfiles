@@ -106,4 +106,7 @@ source /usr/share/doc/pkgfile/command-not-found.bash
 set -o noclobber
 
 # heroku autocomplete setup
-HEROKU_AC_BASH_SETUP_PATH=/home/anas/.cache/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
+HEROKU_AC_BASH_SETUP_PATH=~/.cache/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
+
+# NVM setup
+source /usr/share/nvm/init-nvm.sh
