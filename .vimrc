@@ -69,10 +69,13 @@ Plug 'tomtom/tcomment_vim'
 " Jedi python autocomplete
 Plug 'davidhalter/jedi-vim'
 
+" Vim Surround https://github.com/tpope/vim-surround
+Plug 'tpope/vim-surround'
+
 call plug#end() 
 
 let g:easyescape_chars = { "j": 1, "k": 1 }
-let g:easyescape_timeout = 100
+" let g:easyescape_timeout = 100
 cnoremap jk <Esc>
 cnoremap kj <Esc>
 vnoremap <C-L> <Esc>
@@ -90,7 +93,10 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 set splitbelow " Open terminal below
 
 " So that the terminal is small in size
-set termwinsize=10x0
+set termwinsize=10*0
 
 " Keybinding to open terminal
 nnoremap <leader>` :terminal<CR>
+
+" Keybinding to switch to 'Terminal-Normal mode' inside the vim terminal
+tnoremap <C-n> <c-\><c-n>

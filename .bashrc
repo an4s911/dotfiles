@@ -110,3 +110,7 @@ HEROKU_AC_BASH_SETUP_PATH=~/.cache/heroku/autocomplete/bash_setup && test -f $HE
 
 # NVM setup
 source /usr/share/nvm/init-nvm.sh
+
+## Environment variables
+export EDITOR="vim"
+export TERMINAL="alacritty"

@@ -95,9 +95,9 @@ font-4 = Font Awesome 6 Brands Regular:style=Regular:size=10;1
 font-5 = Font Awesome 6 Free Solid:style=Solid:size=10;1
 font-6 = siji:pixelsize=10;1
 
-modules-left = i3 terminal browser codium chrome files virt-manager anki gimp
+modules-left = i3 terminal browser codium files virt-manager anki
 ; modules-center = mpd
-modules-right = adhan filesystem memory cpu eth pulseaudio xkeyboard screenshooter date time powermenu sep
+modules-right = filesystem memory cpu eth pulseaudio battery xkeyboard screenshooter xbacklight date adhan time powermenu sep
 
 tray-position = right
 tray-padding = 0
@@ -124,7 +124,7 @@ inherit = bar/main
 monitor = eDP1
 tray-position = none
 
-modules-right = adhan pulseaudio xkeyboard ppd-status screenshooter xbacklight date time powermenu battery
+modules-right = uptime filesystem memory cpu eth pulseaudio battery xkeyboard screenshooter xbacklight date adhan time powermenu
 
 [module/sep]
 type = custom/text
@@ -187,7 +187,7 @@ type = custom/script
 
 format = <label>
 
-color = ${colors.normal-1}
+color = ${colors.normal-4}
 
 format-prefix = " "
 format-prefix-foreground = ${self.color}
@@ -204,6 +204,25 @@ interval = 10
 click-right = alacritty -e vim ~/.config/i3/scripts/prayer_times.csv
 
 cursor-click = default
+
+[module/uptime]
+type = custom/script
+
+format = <label>
+
+color = #8fd330
+
+format-prefix = " "
+format-prefix-foreground = ${self.color}
+format-underline = ${self.color}
+
+label = %output%
+
+exec = ~/.config/i3/scripts/uptime
+
+tail = true
+
+interval = 120
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -226,14 +245,19 @@ label-indicator-underline = ${colors.secondary}
 type = internal/battery
 battery = BAT0
 adapter = ADP1
-full-at = 98
+; full-at = 98
 
 color = #5da9ef
 
+label-charging = %percentage%%
+label-discharging = %percentage%%
+
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${self.color}
+format-charging-prefix = "%{T6} %{T-}"
+format-charging-prefix-foreground = #f8fc7b
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
@@ -241,11 +265,13 @@ format-full-prefix-foreground = ${self.color}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
+ramp-capacity-0-background = #f00
 ramp-capacity-1 = 
+ramp-capacity-1-background = #ff0
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${self.color}
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -458,11 +484,8 @@ label = %date%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-sink = alsa_output.pci-0000_00_1b.0.analog-stereo
-
 color = ${colors.normal-6}
 
-; format-volume = <label-volume> <bar-volume>
 format-volume = <ramp-volume> <bar-volume> <label-volume>
 format-volume-underline = ${self.color}
 
@@ -522,7 +545,6 @@ type = custom/text
 
 content = 
 content-foreground = #ff0510
-; content-underline = #ff0510
 
 click-left = ~/.config/i3/scripts/powermenu
 
@@ -559,11 +581,6 @@ screenchange-reload = true
 ;compositing-foreground = source
 ;compositing-border = over
 ;pseudo-transparency = false
-
-[global/wm]
-; margin-top = 5
-; margin-bottom = 5
-
 
 [module/alsa]
 type = internal/alsa
@@ -621,5 +638,5 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 ; menu-2-0-exec = sudo poweroff
 ; menu-2-1 = cancel
 ; menu-2-1-exec = menu-open-0
-
+ 
 ; vim:ft=dosini

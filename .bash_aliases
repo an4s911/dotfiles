@@ -10,6 +10,9 @@ alias echocolors="echo -e '\e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m  
 alias grep="grep --color=auto"
 alias gdb-noc="gdb --silent"
 alias v="vim"
+alias vi="vim"
+
+alias cd..="cd .."
 
 ### Git Aliases ###
 alias gst="git status"

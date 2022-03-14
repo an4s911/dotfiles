@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+uptime="$(neofetch uptime --uptime_shorthand tiny)"
+uptime="${uptime##*: }"
+echo $uptime
