@@ -193,7 +193,8 @@ bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 
 # Lock the system
 # lock by blurring the screen:
-bindsym Ctrl+Mod1+l exec ~/.config/i3/scripts/blur-lock
+# bindsym Ctrl+Mod1+l exec ~/.config/i3/scripts/blur-lock
+bindsym Ctrl+Mod1+l exec light-locker-command -l
 # Suspend
 bindsym Ctrl+Mod1+s exec systemctl suspend
 
@@ -485,7 +486,10 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/blur-lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/blur-lock --nofork
+
+# Now instead i3lock and xss-lock I changed it to light-locker, pretty good integration with lightdm
+exec --no-startup-id light-locker
 
 # Turn on night light on start up
 exec --no-startup-id gammastep -P -O 5100K
