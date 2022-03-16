@@ -95,7 +95,7 @@ font-4 = Font Awesome 6 Brands Regular:style=Regular:size=10;1
 font-5 = Font Awesome 6 Free Solid:style=Solid:size=10;1
 font-6 = siji:pixelsize=10;1
 
-modules-left = i3 terminal browser codium files virt-manager anki
+modules-left = i3 terminal browser codium files virt-manager anki rofi
 ; modules-center = mpd
 modules-right = filesystem memory cpu eth pulseaudio battery xkeyboard screenshooter xbacklight date adhan time powermenu sep
 
@@ -125,6 +125,18 @@ monitor = eDP1
 tray-position = none
 
 modules-right = uptime filesystem memory cpu eth pulseaudio battery xkeyboard screenshooter xbacklight date adhan time powermenu
+
+[module/rofi]
+type = custom/text
+
+color = #2dad98
+
+content = ""
+content-foreground = ${self.color}
+
+click-left = rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
+
+cursor-click = default
 
 [module/sep]
 type = custom/text
