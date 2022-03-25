@@ -5,12 +5,18 @@ alias sl='ls'
 alias l="ls"
 alias lf='ls -lAF'
 alias la='ls -a'
+
 alias codedir='cd $codedir'
+
 alias echocolors="echo -e '\e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   \n\e[100m   \e[101m   \e[102m   \e[103m   \e[104m   \e[105m   \e[106m   \e[107m   \e[0m'"
+
 alias grep="grep --color=auto"
+
 alias gdb-noc="gdb --silent"
+
 alias v="vim"
 alias vi="vim"
+alias vmi="vim"
 
 alias cd..="cd .."
 

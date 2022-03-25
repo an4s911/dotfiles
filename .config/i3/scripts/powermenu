@@ -118,7 +118,7 @@ menu=(
   [ Reboot]="systemctl reboot"
   [ Suspend]="systemctl suspend"
   [ Hibernate]="systemctl hibernate"
-  [ Lock]="~/.config/i3/scripts/blur-lock"
+  [ Lock]="light-locker-command -l"
   [ Logout]="i3-msg exit"
   [ Cancel]=""
 )

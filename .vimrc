@@ -64,13 +64,19 @@ Plug 'preservim/nerdtree'
 Plug 'tomtom/tcomment_vim'
 
 " Autoclose plugin
-" Plug 'Townk/vim-autoclose'
+Plug 'Townk/vim-autoclose'
 
 " Jedi python autocomplete
 Plug 'davidhalter/jedi-vim'
 
 " Vim Surround https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
+
+" Status line
+Plug 'itchyny/lightline.vim'
+
+" Show color for hex colors
+Plug 'ap/vim-css-color'
 
 call plug#end() 
 
@@ -91,6 +97,7 @@ set number
 nnoremap <leader>t :NERDTreeToggle<CR>
 
 set splitbelow " Open terminal below
+set splitright
 
 " So that the terminal is small in size
 set termwinsize=10*0
@@ -100,3 +107,10 @@ nnoremap <leader>` :terminal<CR>
 
 " Keybinding to switch to 'Terminal-Normal mode' inside the vim terminal
 tnoremap <C-n> <c-\><c-n>
+
+" Configs for lightline.vim
+set laststatus=2 " becasue the status line is not visible
+set noshowmode " to not show the insert twice
+let g:lightline = {
+        \ 'colorscheme': 'powerlineish',
+\ }

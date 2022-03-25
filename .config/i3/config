@@ -193,7 +193,7 @@ bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 
 # Lock the system
 # lock by blurring the screen:
-# bindsym Ctrl+Mod1+l exec ~/.config/i3/scripts/blur-lock
+bindsym Shift+Mod1+l exec ~/.config/i3/scripts/blur-lock
 bindsym Ctrl+Mod1+l exec light-locker-command -l
 # Suspend
 bindsym Ctrl+Mod1+s exec systemctl suspend
@@ -281,7 +281,7 @@ bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
 # change borders
 bindsym $mod+u border none
 bindsym $mod+n border normal
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 2
 
 # Move focused workspace to monitor
 bindsym $mod+Ctrl+l move workspace to output right
@@ -404,6 +404,7 @@ assign [class="solanum"] $ws10
 
 # dump workspace (workspace number 19 name $wsdump). So that things don't clutter on other workspaces
 assign [class="Gnome-disks"] $wsdump
+assign [class="Transmission-gtk"] $wsdump
 
 
 # automatic set focus new window if it opens on another workspace then the current:

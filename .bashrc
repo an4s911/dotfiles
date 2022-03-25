@@ -33,19 +33,12 @@ ShowInstallerIsoInfo() {
     fi
 }
 
-
-alias ls='ls --color=auto'
-alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
-alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
-
 [[ "$(whoami)" = "root" ]] && return
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
-## Use the up and down arrow keys for finding a command in history
-## (you can write some initial letters of the command first).
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+# vi mode
+set -o vi
 
 ################################################################################
 ## Some generally useful functions.
@@ -99,18 +92,18 @@ eval "$(gh completion -s bash)"
 # Auto "cd" when enter just a path
 shopt -s autocd
 
-# source for pkgfile/command-not-found reccommendation
+# If a command is typed and it is available as a package
+# that package will be recommended
 source /usr/share/doc/pkgfile/command-not-found.bash
 
 # Prevent overwrite of files refer [ArchWiki](https://wiki.archlinux.org/title/Bash#Prevent_overwrite_of_files)
 set -o noclobber
 
-# heroku autocomplete setup
-HEROKU_AC_BASH_SETUP_PATH=~/.cache/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
-
-# NVM setup
-source /usr/share/nvm/init-nvm.sh
-
 ## Environment variables
 export EDITOR="vim"
 export TERMINAL="alacritty"
+
+## Use the up and down arrow keys for finding a command in history
+## (you can write some initial letters of the command first).
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
