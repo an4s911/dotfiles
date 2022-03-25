@@ -608,5 +608,5 @@ bindsym $mod+t exec rofi -show window \
 ######################
 
 # Set random wallpaper on every i3 start/restart
-set $wallpapers_dir $HOME/Pictures/wallpapers
+# set $wallpapers_dir $HOME/Pictures/wallpapers
 # exec_always "sleep 2 && nitrogen --head=0 --random --set-scaled $wallpapers_dir && nitrogen --head=1 --random --set-scaled $wallpapers_dir"
