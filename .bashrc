@@ -21,7 +21,6 @@ git_parse() {
 }
 
 PS1='\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
-# PS1='\e[01;34m\w\e[0m `git_parse` \n$ '
 
 ### END CBP
 
