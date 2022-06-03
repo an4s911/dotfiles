@@ -368,7 +368,7 @@ set $ws3 "3:"
 set $ws4 "4:"
 set $ws5 "5:"
 set $ws6 "6:"
-set $ws7 "7"
+set $ws7 "7:"
 set $ws8 "8:"
 set $ws9 "9"
 set $ws10 "10"
@@ -393,11 +393,13 @@ assign [class="VSCodium"] $ws3
 assign [class="Thunar"] $ws4
 assign [class="Virt-manager"] $ws5
 assign [class="Chromium"] $ws6
-assign [class="zoom"] $ws7
+assign [class="Anki"] $ws7
+assign [class="zoom"] $ws8
 assign [class="Signal"] $ws8
 assign [class="discord"] $ws8
 assign [class="TelegramDesktop"] $ws8
 assign [class="whatsapp-nativefier-d40211"] $ws8
+assign [class="vlc"] $ws9
 assign [class="libreoffice"] $ws9
 assign [class="libreoffice-writer"] $ws9
 assign [class="solanum"] $ws10
@@ -446,7 +448,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # in this cases better disable dex and use manual starting apps using xdg/autostart
 # if enabled you should comment welcome app.
 # exec_always --no-startup-id dex -a -s ~/.config/autostart/:/etc/xdg/autostart/
-exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id dex --autostart --environment i3 -s ~/.config/autostart/:/etc/xdg/autostart
 
 # start welcome app
 # exec --no-startup-id sh /usr/share/endeavouros/scripts/welcome --startdelay=3 

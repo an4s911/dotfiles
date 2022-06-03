@@ -105,6 +105,17 @@ set termwinsize=10*0
 " Keybinding to open terminal
 nnoremap <leader>` :terminal<CR>
 
+" Keybindings to move through windows 
+nnoremap <C-\>j <C-w>j
+nnoremap <C-\>k <C-w>k
+nnoremap <C-\>l <C-w>l
+nnoremap <C-\>h <C-w>h
+
+tnoremap <C-\>j <C-w>j
+tnoremap <C-\>k <C-w>k
+tnoremap <C-\>l <C-w>l
+tnoremap <C-\>h <C-w>h
+
 " Keybinding to switch to 'Terminal-Normal mode' inside the vim terminal
 tnoremap <C-n> <c-\><c-n>
 
