@@ -1,2 +1,0 @@
-export HISTSIZE=10000
-export XDG_CONFIG_HOME=$HOME/.config

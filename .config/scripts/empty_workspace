@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+
+MAX_WORKSPACES=20
+
+# fetch workspace names from i3 config
+workspaces_fetch=$(grep "set \$ws" ~/.config/i3/config | awk -F'"' '{print $2}' | xargs) 
+additional_workspaces=$(seq -s ' ' 11 1 ${MAX_WORKSPACES})
+
+# merge fetched and additional
+merged_workspaces="$workspaces_fetch $additional_workspaces" 
+
+# replaces spaces with newline chars
+WORKSPACES=${merged_workspaces//[ ]/\\n} 
+
+# find empty i3 workspace
+EMPTY_WORKSPACE=$( (i3-msg -t get_workspaces | tr ',' '\n' | grep name | awk -F'"'  '{print $4}' ; \
+            echo -e ${WORKSPACES} ) | sort -n | uniq -u | head -n 1)
+
+# switch to empty workspace
+i3-msg workspace ${EMPTY_WORKSPACE}
