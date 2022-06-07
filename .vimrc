@@ -125,3 +125,10 @@ set noshowmode " to not show the insert twice
 let g:lightline = {
         \ 'colorscheme': 'powerlineish',
 \ }
+
+" Persist folds
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
