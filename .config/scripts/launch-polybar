@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# The first command line argument is the window manager
+WM=$1
+
+# Terminate already running bar instances for the specified window manager
+kill -9 $(ps ax | grep "polybar ${WM}" | grep -v "grep" | grep -v "launch" | awk -F' ' '{print $1}' | xargs)
+# If all your bars have ipc enabled, you can also use 
+# polybar-msg cmd quit
+
+# Launch the bar(s)
+echo "---" | tee -a "/tmp/polybar-${WM}-1.log" "/tmp/polybar-${WM}-2.log"
+polybar "${WM}-1" 2>&1 | tee -a "/tmp/polybar-${WM}-1.log" & disown
+polybar "${WM}-2" 2>&1 | tee -a "/tmp/polybar-${WM}-2.log" & disown
+
+echo "Bars launched..."
