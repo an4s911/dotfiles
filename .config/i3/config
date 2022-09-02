@@ -125,7 +125,8 @@ assign [class="whatsapp-nativefier-d40211"] $ws7
 assign [class="vlc"] $ws8
 
 assign [class="libreoffice"] $ws9
-assign [class="libreoffice-writer"] $ws9
+assign [instance="libreoffice"] $ws9
+assign [class="libreoffice*" instance="libreoffice"] $ws9
 assign [class="Evince"] $ws9
 assign [class="Xournalpp"] $ws9
 
@@ -252,7 +253,7 @@ exec --no-startup-id xset s 480 dpms 600 600 600
 exec --no-startup-id xautolock -locker "systemctl suspend" -time 15
 exec --no-startup-id light-locker
 
-exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+exec --no-startup-id dunst
 
 # get authentication to work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -261,8 +262,9 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gammastep -P -O 5100K
 
 # for laptops, reports when low or high battery
-exec --no-startup-id batsignal -e -w 15 -W "The Charge is really low, please put it for charge" -c 0 \
-        -d 5 -D "Do something quick or arch will die now" -f 98 -F "You can unplug now, don't let it overflow the battery" -b -I battery
+# TODO: make custom script for this
+exec --no-startup-id batsignal -e -w 15 -W "Battery Low!" -c 0 \
+        -d 5 -D "Battery about to DIE!!" -f 98 -F "Battery full, unplug" -b -I battery-full
 
 ##### system tray apps ####
 
@@ -405,6 +407,7 @@ bindsym $mod+Shift+p exec $script_dir/power-profiles
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+f exec --no-startup-id firefox
 bindsym $mod+e exec --no-startup-id thunar ~/
+bindsym $mod+c exec --no-startup-id codium
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
 bindsym $mod+Shift+F1 exec --no-startup-id pavucontrol
 bindsym $mod+Mod1+c exec --no-startup-id xfce4-popup-clipman
@@ -414,11 +417,11 @@ bindsym Mod1+Control+n exec variety -n
 bindsym Mod1+Control+p exec variety -p
 bindsym Mod1+Control+f exec variety -f
 
-##### brighness keys #####
+##### brightness keys #####
 
 # Backlight control
-bindsym XF86MonBrightnessUp exec xbacklight +10
-bindsym XF86MonBrightnessDown exec xbacklight -10
+bindsym XF86MonBrightnessUp exec xbacklight +5
+bindsym XF86MonBrightnessDown exec xbacklight -5
 
 bindsym $mod+F11 exec xbacklight -5
 bindsym $mod+F12 exec xbacklight +5

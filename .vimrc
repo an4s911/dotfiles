@@ -75,8 +75,25 @@ Plug 'tpope/vim-surround'
 " Status line
 Plug 'itchyny/lightline.vim'
 
-" Show color for hex colors
-Plug 'ap/vim-css-color'
+" Conquer of Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Autoclose html tags
+Plug 'alvan/vim-closetag'
+
+" Emmet features in vim
+Plug 'mattn/emmet-vim'
+
+" Startify welcome screen
+Plug 'mhinz/vim-startify'
+
+" Show color for colors codes
+" golang must be installed before the plugin
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+" Vim Wiki for taking notes and what not
+" For writing markdown basically
+Plug 'vimwiki/vimwiki'
 
 call plug#end() 
 
@@ -92,6 +109,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set number
+set termguicolors
 
 " Keybinding to toggle NERDTree
 nnoremap <leader>t :NERDTreeToggle<CR>
@@ -99,8 +117,6 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 set splitbelow " Open terminal below
 set splitright
 
-" So that the terminal is small in size
-set termwinsize=10*0
 
 " Keybinding to open terminal
 nnoremap <leader>` :terminal<CR>
@@ -126,9 +142,23 @@ let g:lightline = {
         \ 'colorscheme': 'powerlineish',
 \ }
 
-" Persist folds
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
+
+" Startify options
+let g:startify_bookmarks = [ {'v': '~/.vimrc'}, ]
+
+" Hexokinase options
+let g:Hexokinase_highlighters = ['backgroundfull']
+let g:Hexokinase_ftOptInPatterns = {
+\     'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+\     'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+\     'javascript': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+\     'cfg': 'full_hex',
+\     'dosini': 'full_hex',
+\     'i3config': 'full_hex',
+\ }
+
+" VimWiki options
+set nocompatible
+filetype plugin on
+syntax on
+let g:vimwiki_list = [{'path': '~/Documents/Notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]

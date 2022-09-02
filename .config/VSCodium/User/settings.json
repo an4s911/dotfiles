@@ -47,8 +47,16 @@
     "editor.minimap.enabled": false,
     "editor.formatOnSave": true,
     "liveServer.settings.CustomBrowser": "firefox:PrivateMode",
-    "window.menuBarVisibility": "toggle",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "window.menuBarVisibility": "toggle",
+
+	// Preferences used to modify behavior of some actions and resolvers of Emmet.
+	"emmet.preferences": {
+        "output.inlineBreak": 1,
+    },
 }
