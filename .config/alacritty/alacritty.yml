@@ -60,7 +60,7 @@ window:
   opacity: 0.86
   padding:
     x: 15
-    y: 15
+    y: 10
 
 # for allowing mouse clicks in vim
 env:

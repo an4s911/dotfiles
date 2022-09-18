@@ -107,6 +107,7 @@ assign [class="Alacritty"] $ws1
 
 assign [class="(?i)firefox"] $ws2
 assign [class="Chromium"] $ws2
+assign [class="Google-chrome"] $ws2
 
 assign [class="VSCodium"] $ws3
 
@@ -140,6 +141,9 @@ assign [class="GParted"] $ws10
 for_window [class=Alacritty] focus
 for_window [class=(?i)firefox] focus
 
+# auto back and forth when switching to current workspace
+workspace_auto_back_and_forth yes
+
 ##### floating rules #####
 
 # set floating for apps needing it
@@ -154,7 +158,6 @@ for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-for_window [class="Anki" instance="anki"] floating enable
 
 # Floating windows maximum size
 #floating_maximum_size 1000 x 760
@@ -260,7 +263,7 @@ exec --no-startup-id dunst
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # night light (better on the eyes)
-exec --no-startup-id gammastep -P -O 5100K
+exec_always --no-startup-id gammastep -P -O 5100K
 
 # for laptops, reports when low or high battery
 # TODO: make custom script for this

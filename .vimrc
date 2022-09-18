@@ -69,6 +69,12 @@ Plug 'Townk/vim-autoclose'
 " Jedi python autocomplete
 Plug 'davidhalter/jedi-vim'
 
+" Easy Grep
+Plug 'vim-scripts/EasyGrep'
+
+" Rename variables
+Plug 'vim-scripts/rename.vim'
+
 " Vim Surround https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
 
@@ -95,6 +101,9 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " For writing markdown basically
 Plug 'vimwiki/vimwiki'
 
+" show git branch in status line
+Plug 'itchyny/vim-gitbranch'
+
 call plug#end() 
 
 let g:easyescape_chars = { "j": 1, "k": 1 }
@@ -110,6 +119,32 @@ set shiftwidth=4
 set expandtab
 set number
 set termguicolors
+set mouse=a
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+" NERDTree settings
+let NERDTreeShowHidden=1
+
+" Emmet vim options
+let g:user_emmet_settings = {
+\  'variables': {'lang': 'en'},
+\  'html': {
+\    'snippets': {
+\      'html:5': "<!DOCTYPE html>\n"
+\              ."<html lang=\"${lang}\">\n"
+\              ."<head>\n"
+\              ."\t<meta charset=\"${charset}\">\n"
+\              ."\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+\              ."\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+\              ."\t<title>|</title>\n"
+\              ."</head>\n"
+\              ."<body>\n\t${child}|\n</body>\n"
+\              ."</html>",
+\    },
+\  },
+\}
 
 " Keybinding to toggle NERDTree
 nnoremap <leader>t :NERDTreeToggle<CR>
@@ -132,6 +167,9 @@ tnoremap <C-\>k <C-w>k
 tnoremap <C-\>l <C-w>l
 tnoremap <C-\>h <C-w>h
 
+" Keybinding to go to startify page
+nnoremap <leader>s :Startify<CR>
+
 " Keybinding to switch to 'Terminal-Normal mode' inside the vim terminal
 tnoremap <C-n> <c-\><c-n>
 
@@ -139,12 +177,23 @@ tnoremap <C-n> <c-\><c-n>
 set laststatus=2 " becasue the status line is not visible
 set noshowmode " to not show the insert twice
 let g:lightline = {
-        \ 'colorscheme': 'powerlineish',
+\   'colorscheme': 'powerlineish',
+\   'active': {
+\       'left': [ [ 'mode', 'paste' ],
+\                 [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
+\   },
+\   'component_function': {
+\       'gitbranch': 'gitbranch#name',
+\   },
+\   
 \ }
+" \   'active': {
+" \       'left'
+" \   },
 
 
 " Startify options
-let g:startify_bookmarks = [ {'v': '~/.vimrc'}, ]
+let g:startify_bookmarks = [ {'rc': '~/.vimrc'}, {'i3': '~/.config/i3/config'}, {'sc': '~/.config/scripts/'} ]
 
 " Hexokinase options
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -161,4 +210,7 @@ let g:Hexokinase_ftOptInPatterns = {
 set nocompatible
 filetype plugin on
 syntax on
-let g:vimwiki_list = [{'path': '~/Documents/Notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/megasync/Notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}, {'path': '~/Documents/Notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+
+" show command enterred bottom right corner
+set showcmd

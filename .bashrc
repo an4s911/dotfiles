@@ -85,6 +85,7 @@ _open_files_for_editing() {
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
 source ~/.bash_aliases
+source ~/.bash_profile
 
 # GitHub cli completion
 eval "$(gh completion -s bash)"
@@ -107,3 +108,8 @@ export TERMINAL="alacritty"
 ## (you can write some initial letters of the command first).
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
+
+# Zsh like autocomplete
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+bind 'set completion-ignore-case on'
