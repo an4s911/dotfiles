@@ -25,7 +25,7 @@
 # rofi (optional if dmenu installed)
 # thunar
 # xautolock
-# xbacklight
+# brightnessctl
 # xfce4-notifyd
 # xset
 #
@@ -110,24 +110,25 @@ assign [class="Chromium"] $ws2
 assign [class="Google-chrome"] $ws2
 
 assign [class="VSCodium"] $ws3
+assign [class="Apache NetBeans IDE 14"] $ws3
 
 assign [class="Thunar"] $ws4
 
 assign [class="Virt-manager"] $ws5
 
 assign [class="Anki"] $ws6
+assign [class="Minecraft*"] $ws6
+assign [class="ru-turikhay-tlauncher-bootstrap-Bootstrap"] $ws6
 
 assign [class="zoom"] $ws7
 assign [class="Signal"] $ws7
 assign [class="discord"] $ws7
 assign [class="TelegramDesktop"] $ws7
 assign [class="whatsapp-nativefier-d40211"] $ws7
+assign [class="Microsoft Teams - Preview"] $ws7
 
 assign [class="vlc"] $ws8
 
-assign [class="libreoffice"] $ws9
-assign [instance="libreoffice"] $ws9
-assign [class="libreoffice*" instance="libreoffice"] $ws9
 assign [class="Evince"] $ws9
 assign [class="Xournalpp"] $ws9
 
@@ -354,16 +355,16 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$left move left 40px
+bindsym $mod+Shift+$down move down 40px
+bindsym $mod+Shift+$up move up 40px
+bindsym $mod+Shift+$right move right 40px
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left 10px
+bindsym $mod+Shift+Down move down 10px
+bindsym $mod+Shift+Up move up 10px
+bindsym $mod+Shift+Right move right 10px
 
 # split in horizontal orientation
 bindsym $mod+Ctrl+Shift+h split h
@@ -388,7 +389,7 @@ bindsym $mod+n border normal
 bindsym $mod+y border pixel 2
 
 # get all the keyboard shortcuts
-bindsym F1 exec $script_dir/keyhint
+bindsym Mod1+F1 exec $script_dir/keyhint
 
 ##### system keys #####
 
@@ -424,11 +425,11 @@ bindsym Mod1+Control+f exec variety -f
 ##### brightness keys #####
 
 # Backlight control
-bindsym XF86MonBrightnessUp exec xbacklight +5
-bindsym XF86MonBrightnessDown exec xbacklight -5
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 
-bindsym $mod+F11 exec xbacklight -5
-bindsym $mod+F12 exec xbacklight +5
+# bindsym $mod+F5 exec brightnessctl set 5-
+# bindsym $mod+F6 exec brightnessctl set +5
 
 ##### volume keys #####
 
@@ -452,18 +453,18 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+F5 exec playerctl position 10-
+bindsym $mod+F5 exec playerctl position 5-
 bindsym $mod+F6 exec playerctl play-pause
-bindsym $mod+F7 exec playerctl position 10+
+bindsym $mod+F7 exec playerctl position 5+
 
 ##### launcher keys #####
 
 # rofi
-bindsym $mod+d exec rofi -modi drun -show drun \
+bindsym $mod+d exec rofi -modi drun -show drun -dpi 1 \
 		-config ~/.config/rofi/rofidmenu.rasi
-bindsym $mod+Shift+d exec rofi -show run \
+bindsym $mod+Shift+d exec rofi -show run -dpi 1 \
         -config ~/.config/rofi/rofidmenu.rasi
-bindsym $mod+t exec rofi -show window \
+bindsym $mod+t exec rofi -show window -dpi 1 \
 		-config ~/.config/rofi/rofidmenu.rasi
 
 # start dmenu (a program launcher), if needed (fallback)
@@ -486,10 +487,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left resize shrink width 10 px or 10 ppt
-        bindsym $down resize grow height 10 px or 10 ppt
-        bindsym $up resize shrink height 10 px or 10 ppt
-        bindsym $right resize grow width 10 px or 10 ppt
+        bindsym $left resize shrink width 40 px or 40 ppt
+        bindsym $down resize grow height 40 px or 40 ppt
+        bindsym $up resize shrink height 40 px or 40 ppt
+        bindsym $right resize grow width 40 px or 40 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt

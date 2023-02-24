@@ -3,9 +3,6 @@
 #
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-[[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
 
 ### CUSTOM BASH PROMPT - CBP
 
@@ -24,16 +21,7 @@ PS1='\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
 
 ### END CBP
 
-ShowInstallerIsoInfo() {
-    local file=/usr/lib/endeavouros-release
-    if [ -r $file ] ; then
-        cat $file
-    else
-        echo "Sorry, installer ISO info is not available." >&2
-    fi
-}
 
-[[ "$(whoami)" = "root" ]] && return
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 

@@ -41,6 +41,13 @@ augroup vimrcEx
   autocmd FileType text setlocal textwidth=78
 augroup END
 
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+
 " Add optional packages.
 "
 " The matchit plugin makes the % command work better, but it is not backwards
@@ -104,6 +111,8 @@ Plug 'vimwiki/vimwiki'
 " show git branch in status line
 Plug 'itchyny/vim-gitbranch'
 
+Plug 'ternjs/tern_for_vim', { 'do' : 'npm install' }
+
 call plug#end() 
 
 let g:easyescape_chars = { "j": 1, "k": 1 }
@@ -113,7 +122,7 @@ cnoremap kj <Esc>
 vnoremap <C-L> <Esc>
 vnoremap <C-L> <Esc>
 
-set nohls
+set hls
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -193,7 +202,7 @@ let g:lightline = {
 
 
 " Startify options
-let g:startify_bookmarks = [ {'rc': '~/.vimrc'}, {'i3': '~/.config/i3/config'}, {'sc': '~/.config/scripts/'} ]
+let g:startify_bookmarks = [ {'rc': '~/.vimrc'}, {'i3': '~/.config/i3/config'}, {'sc': '~/.config/scripts/'}, {'pb': '~/.config/polybar/config.ini'} ]
 
 " Hexokinase options
 let g:Hexokinase_highlighters = ['backgroundfull']

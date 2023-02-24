@@ -10,12 +10,16 @@ kill -9 $(ps ax | grep "polybar ${WM}" | grep -v "grep" | grep -v "launch" | awk
 
 # env variables for monitors and network interface
 export MONITOR_1=$(xrandr --query | grep " connected " | grep primary | awk -F" " '{ print $1 }')
-export MONITOR_2=$(xrandr --query | grep " connected " | grep -v primary | awk -F" " '{ print $1 }' | head -n 1)
+# export MONITOR_2=$(xrandr --query | grep " connected " | grep -v primary | awk -F" " '{ print $1 }' | head -n 1)
 export NET_INTERFACE=$(nmcli device  | grep " connected" | awk -F" " '{ print $1 }' | head -n 1)
 
 # Launch the bar(s)
-echo "---" | tee -a "/tmp/polybar-${WM}-1.log" "/tmp/polybar-${WM}-2.log"
+# First bar
+echo "---" | tee -a "/tmp/polybar-${WM}-1.log"
 polybar "${WM}-1" 2>&1 | tee -a "/tmp/polybar-${WM}-1.log" & disown
-polybar "${WM}-2" 2>&1 | tee -a "/tmp/polybar-${WM}-2.log" & disown
+
+# Second bar
+#echo "---" | tee -a "/tmp/polybar-${WM}-2.log"
+#polybar "${WM}-2" 2>&1 | tee -a "/tmp/polybar-${WM}-2.log" & disown
 
 echo "Bars launched..."

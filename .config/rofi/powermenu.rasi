@@ -3,7 +3,7 @@
  * Maintainer: joekamprad <joekamprad@endeavouros.com>
  *******************************************************/
 configuration {
-    font:                           "Sourcecode Pro Regular 10";
+    font:                           "Ubuntu Mono 12";
     show-icons:                     false;
     icon-theme: 		    "Arc-X-D";
     scroll-method:                  0;
@@ -18,11 +18,11 @@ window {
     border:                         0;
     padding:                        10;
     transparency:                   "real";
-    width:                          120px;
+    width:                          300px;
     location:                       east;
-/*y-offset:                       18;*/
-/*x-offset:	                    850;*/
-    transparency:                   "real";
+    /* y-offset:                       18; */
+    /* x-offset:	                    850; */
+    /* transparency:                   "real"; */
 }
 listview {
     lines:                          7;
@@ -31,7 +31,7 @@ listview {
 }
 element {
     border:  0;
-    padding: 1px ;
+    padding: 12px ;
 }
 element-text {
     background-color: inherit;

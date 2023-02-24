@@ -9,22 +9,42 @@
     },
     "vim.insertModeKeyBindingsNonRecursive": [
         {
-            "before": ["j", "k"],
-            "after": ["<Esc>"]
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         },
         {
-            "before": ["J", "K"],
-            "after": ["<Esc>"]
+            "before": [
+                "J",
+                "K"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         }
     ],
     "vim.commandLineModeKeyBindings": [
         {
-            "before": ["j", "k"],
-            "after": ["<Esc>"]
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         },
         {
-            "before": ["J", "K"],
-            "after": ["<Esc>"]
+            "before": [
+                "J",
+                "K"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         }
     ],
     "editor.lineNumbers": "relative",
@@ -54,9 +74,17 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "window.menuBarVisibility": "toggle",
-
-	// Preferences used to modify behavior of some actions and resolvers of Emmet.
-	"emmet.preferences": {
-        "output.inlineBreak": 1,
+    // Preferences used to modify behavior of some actions and resolvers of Emmet.
+    "emmet.preferences": {
+        "output.inlineBreak": 1
     },
+    "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "fiveServer.navigate": false,
+    "fiveServer.injectBody": true,
+    "fiveServer.browser": [
+        "firefox --private-window"
+    ],
+    "window.zoomLevel": 1,
+    "workbench.iconTheme": "Monokai Classic Icons"
 }
