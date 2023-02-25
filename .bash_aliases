@@ -27,5 +27,9 @@ alias push="git push --verify --verbose --progress"
 alias pull="git pull --verify --verbose"
 alias fetch="git fetch --verify --verbose"
 
+# dotfiles
+alias dts="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/dotfiles/private"
+alias dgst="dts status"
+
 ### Setup nvm
 alias usenvm='export NVM_DIR="$HOME/.config/nvm";[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion";'

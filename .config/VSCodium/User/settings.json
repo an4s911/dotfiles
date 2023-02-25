@@ -63,7 +63,7 @@
     "prettier.tabWidth": 4,
     "workbench.startupEditor": "none",
     "editor.fontFamily": "'Ubuntu Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'Font Awesome 6 Free Solid', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.fontSize": 15,
+    "editor.fontSize": 17,
     "editor.minimap.enabled": false,
     "editor.formatOnSave": true,
     "liveServer.settings.CustomBrowser": "firefox:PrivateMode",
@@ -80,11 +80,4 @@
     },
     "security.workspace.trust.untrustedFiles": "open",
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "fiveServer.navigate": false,
-    "fiveServer.injectBody": true,
-    "fiveServer.browser": [
-        "firefox --private-window"
-    ],
-    "window.zoomLevel": 1,
-    "workbench.iconTheme": "Monokai Classic Icons"
 }
