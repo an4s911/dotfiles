@@ -18,10 +18,28 @@ git_parse() {
 	fi
 }
 
-PS1='\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
+function set_virtualenv() {
+    if test -z "$VIRTUAL_ENV" ; then
+        PYTHON_VIRTUALENV=""
+    else
+        PYTHON_VIRTUALENV="`basename $VIRTUAL_ENV`"
+    fi
+}
+
+function set_bash_prompt() {
+    set_virtualenv
+
+    if test -z "$PYTHON_VIRTUALENV" ; then
+        PS1='\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
+    else
+        PS1='(\e[1;36m${PYTHON_VIRTUALENV}\e[0m)\n\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
+    fi
+}
+
+PROMPT_COMMAND=set_bash_prompt
+
 
 ### END CBP
-
 
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
@@ -73,6 +91,10 @@ _open_files_for_editing() {
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 
+# Git completion setup for aliases
+source /usr/share/git/completion/git-completion.bash
+
+# Bash
 source ~/.bash_aliases
 source ~/.bash_profile
 

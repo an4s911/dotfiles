@@ -80,4 +80,5 @@
     },
     "security.workspace.trust.untrustedFiles": "open",
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "workbench.sideBar.location": "right"
 }

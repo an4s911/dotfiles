@@ -1,4 +1,4 @@
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -F'
 alias ll='ls -lavsh --ignore=..'   # show long listing of all except "..", show human readable file sizes as well
 alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 alias sl='ls'
@@ -28,8 +28,11 @@ alias pull="git pull --verify --verbose"
 alias fetch="git fetch --verify --verbose"
 
 # dotfiles
-alias dts="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/dotfiles/private"
-alias dgst="dts status"
+alias dft="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/dotfiles/private"
+__git_complete dft __git_main
+alias dfst="dft status"
+alias dft-commit="dft commit -m \"$(date +'Backup at %d %b %Y %R')\""
+
 
 ### Setup nvm
 alias usenvm='export NVM_DIR="$HOME/.config/nvm";[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion";'

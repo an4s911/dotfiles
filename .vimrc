@@ -16,6 +16,9 @@ if v:progname =~? "evim"
   finish
 endif
 
+" Get the defaults that most users want.
+" source $VIMRUNTIME/defaults.vim
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
@@ -193,10 +196,6 @@ let g:lightline = {
 \   },
 \   
 \ }
-" \   'active': {
-" \       'left'
-" \   },
-
 
 " Startify options
 let g:startify_bookmarks = [ {'rc': '~/.vimrc'}, {'i3': '~/.config/i3/config'}, {'sc': '~/.config/scripts/'}, {'pb': '~/.config/polybar/config.ini'} ]
@@ -220,3 +219,10 @@ let g:vimwiki_list = [{'path': '~/megasync/Notes/vimwiki', 'syntax': 'markdown',
 
 " show command enterred bottom right corner
 set showcmd
+
+" Run python file on pressing F5
+autocmd FileType python map <buffer> <F5> :w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>
+
+" Autopep8 for python
+autocmd FileType python setlocal formatprg=autopep8\ -
