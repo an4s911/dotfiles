@@ -1,32 +1,3 @@
-# Colors (Ubuntu)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '#300a24'
-#     foreground: '#eeeeec'
-#
-#   # Normal colors
-#   normal:
-#     black:   '#2e3436'
-#     red:     '#cc0000'
-#     green:   '#4e9a06'
-#     yellow:  '#c4a000'
-#     blue:    '#3465a4'
-#     magenta: '#75507b'
-#     cyan:    '#06989a'
-#     white:   '#d3d7cf'
-#
-#   # Bright colors
-#   bright:
-#     black:   '#555753'
-#     red:     '#ef2929'
-#     green:   '#8ae234'
-#     yellow:  '#c5a000'
-#     blue:    '#729fcf'
-#     magenta: '#ad7fa8'
-#     cyan:    '#05889a'
-#     white:   '#eeeeec'
-
 # Colors EndeavourOS
 colors:
   # Default colors
@@ -34,7 +5,7 @@ colors:
     background: '#08052b'
     foreground: '#e3e3ea'
 
-  # Normal colors
+    # Normal colors
   normal:
     black:   '#08052b'
     red:     '#ff7f7f'
@@ -43,9 +14,10 @@ colors:
     blue:    '#7fbaff'
     magenta: '#7f3fbf'
     cyan:    '#7f7fff'
-    white:   '#cdccdb'
+    # white:   '#cdccdb'
+    white:   '#8d8c95'
 
-  # Bright colors
+    # Bright colors
   bright:
     black:   '#7fbaff'
     red:     '#ff7f7f'
@@ -54,20 +26,23 @@ colors:
     blue:    '#7f7fff'
     magenta: '#7f3fbf'
     cyan:    '#7f7fff'
-    white:   '#e3e3ea'
+    white:   '#ffffff'
 
 window:
   opacity: 0.86
   padding:
-    x: 15
-    y: 10
+    x: 12
+    y: 0
 
-# for allowing mouse clicks in vim
 env:
+  # for allowing mouse clicks in vim
   TERM: xterm-256color
 
 key_bindings:
   - { key: Return,  mods: Control|Shift,  action: SpawnNewInstance  }
+  - { key: Slash, mods: Control, chars: "\x1b[47;5u" }
+  - { key: Space, mods: Control, chars: "\x1b[32;5u" }
+  - { key: Back, mods: Control, chars: "\x17" }
 
 font:
   normal:
@@ -79,5 +54,5 @@ font:
   italic:
     family: Ubuntu Mono
     style: Italic
-  size: 16
+  size: 24
 

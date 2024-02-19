@@ -9,11 +9,6 @@
         "command": "editor.emmet.action.prevEditPoint"
     },
     {
-        "key": "shift+5",
-        "command": "editor.emmet.action.matchTag",
-        "when": "vim.mode == 'Normal' || vim.mode == Visual"
-    },
-    {
         "key": "ctrl+alt+t",
         "command": "workbench.action.toggleMaximizedPanel"
     },

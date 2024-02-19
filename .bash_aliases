@@ -1,9 +1,8 @@
 alias ls='ls --color=auto -F'
-alias ll='ls -lavsh --ignore=..'   # show long listing of all except "..", show human readable file sizes as well
+alias ll='ls -lavsh --ignore=..' # show long listing of all except "..", show human readable file sizes as well
 alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 alias sl='ls'
 alias l="ls"
-alias lf='ls -lAF'
 alias la='ls -a'
 
 alias codedir='cd $codedir'
@@ -14,11 +13,15 @@ alias grep="grep --color=auto"
 
 alias gdb-noc="gdb --silent"
 
-alias v="vim"
-alias vi="vim"
 alias vmi="vim"
+alias vi="vim"
+
+alias nv="nvim"
+alias nivm="nvim"
 
 alias cd..="cd .."
+
+alias battery-health="awk -v curr='$(cat /sys/class/power_supply/BAT0/energy_full)' -v design='$(cat /sys/class/power_supply/BAT0/energy_full_design)' 'BEGIN { printf \"%.2f%%\n\", (curr/design*100) }'"
 
 ### Git Aliases ###
 alias gst="git status"

@@ -13,39 +13,39 @@
 " When started as "evim", evim.vim will already have done these settings, bail
 " out.
 if v:progname =~? "evim"
-  finish
+    finish
 endif
 
 " Get the defaults that most users want.
 " source $VIMRUNTIME/defaults.vim
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+    set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file (restore to previous version)
-  if has('persistent_undo')
-    set undofile	" keep an undo file (undo changes after closing)
-  endif
+    set backup		" keep a backup file (restore to previous version)
+    if has('persistent_undo')
+        set undofile	" keep an undo file (undo changes after closing)
+    endif
 endif
 
 if &t_Co > 2 || has("gui_running")
-  " Switch on highlighting the last used search pattern.
-  set hlsearch
+    " Switch on highlighting the last used search pattern.
+    set hlsearch
 endif
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-  au!
+    au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+    " For all text files set 'textwidth' to 78 characters.
+    autocmd FileType text setlocal textwidth=78
 augroup END
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
 
 
 " Add optional packages.
@@ -55,7 +55,7 @@ autocmd BufReadPost *
 " The ! means the package won't be loaded right away but when plugins are
 " loaded during initialization.
 if has('syntax') && has('eval')
-  packadd! matchit
+    packadd! matchit
 endif
 
 " Plugins
@@ -138,22 +138,22 @@ let NERDTreeShowHidden=1
 
 " Emmet vim options
 let g:user_emmet_settings = {
-\  'variables': {'lang': 'en'},
-\  'html': {
-\    'snippets': {
-\      'html:5': "<!DOCTYPE html>\n"
-\              ."<html lang=\"${lang}\">\n"
-\              ."<head>\n"
-\              ."\t<meta charset=\"${charset}\">\n"
-\              ."\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-\              ."\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-\              ."\t<title>|</title>\n"
-\              ."</head>\n"
-\              ."<body>\n\t${child}|\n</body>\n"
-\              ."</html>",
-\    },
-\  },
-\}
+            \  'variables': {'lang': 'en'},
+            \  'html': {
+            \    'snippets': {
+            \      'html:5': "<!DOCTYPE html>\n"
+            \              ."<html lang=\"${lang}\">\n"
+            \              ."<head>\n"
+            \              ."\t<meta charset=\"${charset}\">\n"
+            \              ."\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+            \              ."\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+            \              ."\t<title>|</title>\n"
+            \              ."</head>\n"
+            \              ."<body>\n\t${child}|\n</body>\n"
+            \              ."</html>",
+            \    },
+            \  },
+            \}
 
 " Keybinding to toggle NERDTree
 nnoremap <leader>t :NERDTreeToggle<CR>
@@ -164,6 +164,7 @@ set splitright
 
 " Keybinding to open terminal
 nnoremap <leader>` :terminal<CR>
+nnoremap <C-`> :terminal<CR>
 
 " Keybindings to move through windows 
 nnoremap <C-\>j <C-w>j
@@ -186,16 +187,16 @@ tnoremap <C-n> <c-\><c-n>
 set laststatus=2 " becasue the status line is not visible
 set noshowmode " to not show the insert twice
 let g:lightline = {
-\   'colorscheme': 'powerlineish',
-\   'active': {
-\       'left': [ [ 'mode', 'paste' ],
-\                 [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
-\   },
-\   'component_function': {
-\       'gitbranch': 'gitbranch#name',
-\   },
-\   
-\ }
+            \   'colorscheme': 'powerlineish',
+            \   'active': {
+            \       'left': [ [ 'mode', 'paste' ],
+            \                 [ 'gitbranch', 'readonly', 'filename', 'modified' ]],
+            \   },
+            \   'component_function': {
+            \       'gitbranch': 'gitbranch#name',
+            \   },
+            \   
+            \ }
 
 " Startify options
 let g:startify_bookmarks = [ {'rc': '~/.vimrc'}, {'i3': '~/.config/i3/config'}, {'sc': '~/.config/scripts/'}, {'pb': '~/.config/polybar/config.ini'} ]
@@ -203,13 +204,13 @@ let g:startify_bookmarks = [ {'rc': '~/.vimrc'}, {'i3': '~/.config/i3/config'}, 
 " Hexokinase options
 let g:Hexokinase_highlighters = ['backgroundfull']
 let g:Hexokinase_ftOptInPatterns = {
-\     'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
-\     'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
-\     'javascript': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
-\     'cfg': 'full_hex',
-\     'dosini': 'full_hex',
-\     'i3config': 'full_hex',
-\ }
+            \     'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+            \     'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+            \     'javascript': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+            \     'cfg': 'full_hex',
+            \     'dosini': 'full_hex',
+            \     'i3config': 'full_hex',
+            \ }
 
 " VimWiki options
 set nocompatible
@@ -223,6 +224,10 @@ set showcmd
 " Run python file on pressing F5
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>
+
+" Run java file on pressing F5
+autocmd FileType java map <buffer> <F5> :w<CR>:exec '!javac' shellescape(@%, 1) '&& java' shellescape(expand('%:t:r'), 1) '&& rm ./*.class' <CR>
+autocmd FileType java imap <buffer> <F5> <esc>:w<CR>:exec '!javac' shellescape(@%, 1) '&& java' shellescape(expand('%:t:r'), 1) '&& rm ./*.class' <CR>
 
 " Autopep8 for python
 autocmd FileType python setlocal formatprg=autopep8\ -

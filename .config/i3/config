@@ -81,14 +81,14 @@
 set $mod Mod4
 
 # Font for window titles
-font pango:Ubuntu Mono 9
+font pango:Ubuntu Mono 18
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # default workspace layout, if not set then default is
 # horizontal split
-#workspace_layout tabbed
+workspace_layout tabbed
 
 # gaps, only works with i3-gaps
 #gaps inner 4
@@ -108,11 +108,17 @@ assign [class="Alacritty"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="Chromium"] $ws2
 assign [class="Google-chrome"] $ws2
+assign [class="Microsoft-edge"] $ws2
 
 assign [class="VSCodium"] $ws3
-assign [class="Apache NetBeans IDE 14"] $ws3
+assign [class="Code"] $ws3
+assign [class="Apache NetBeans IDE*"] $ws3 
+assign [class="jetbrains-idea-ce"] $ws3
+assign [class="Vivado"] $ws3
+assign [class="Mysql-workbench-bin"] $ws3
 
 assign [class="Thunar"] $ws4
+assign [class="Ranger"] $ws4
 
 assign [class="Virt-manager"] $ws5
 
@@ -124,13 +130,15 @@ assign [class="zoom"] $ws7
 assign [class="Signal"] $ws7
 assign [class="discord"] $ws7
 assign [class="TelegramDesktop"] $ws7
-assign [class="whatsapp-nativefier-d40211"] $ws7
 assign [class="Microsoft Teams - Preview"] $ws7
 
 assign [class="vlc"] $ws8
+assign [class="Gimp-*"] $ws8
+assign [class="Audacity" instance="audacity"] $ws8
 
 assign [class="Evince"] $ws9
 assign [class="Xournalpp"] $ws9
+assign [class="libreoffice*" instance="libreoffice"] $ws9
 
 assign [class="solanum"] $ws10
 assign [class="Gnome-disks"] $ws10
@@ -159,6 +167,7 @@ for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="smile" instance="smile"] floating enable
 
 # Floating windows maximum size
 #floating_maximum_size 1000 x 760
@@ -167,9 +176,9 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 
 # border size and title bar
 # when border is set then there will be no title bar
-new_window pixel 2
-default_border pixel 2
-for_window [class=.*] border pixel 2
+new_window pixel 1
+default_border pixel 1
+for_window [class=.*] border pixel 1
 
 # Title bar allowed for "Onboard" only
 for_window [class="Onboard" instance="onboard"] border normal
@@ -250,9 +259,6 @@ exec --no-startup-id dex --autostart --environment i3
 
 exec --no-startup-id picom -b
 
-# numlock turned ON on boot
-exec --no-startup-id numlockx on
-
 # lock the screen in 8 mins and suspend 7 mins after that (15 mins total)
 exec --no-startup-id xset s 480 dpms 600 600 600
 exec --no-startup-id xautolock -locker "systemctl suspend" -time 15
@@ -261,16 +267,19 @@ exec --no-startup-id light-locker
 exec --no-startup-id dunst
 
 # get authentication to work with polkit-gnome
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # for arch
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 # for debian
 
 # night light (better on the eyes)
 exec_always --no-startup-id gammastep -P -O 5100K
 
+# flameshot screenshot tool
+exec --no-startup-id flameshot
+
 # for laptops, reports when low or high battery
 # TODO: make custom script for this
-exec --no-startup-id batsignal -e -w 15 -W "Battery Low!" -c 0 \
-        -d 5 -D "Battery about to DIE!!" -f 98 -F "Battery full, unplug" -b -I battery-full
 
+exec --no-startup-id batsignal -w 40 -W "Battery low!" -c 0 -d 5 -D "Battery about to DIE" -f 97 -F "Battery full, unplug the charger" -b -I battery-full
 ##### system tray apps ####
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
@@ -327,6 +336,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # swtich to empty workspace
 bindsym $mod+Shift+n exec $script_dir/empty_workspace
+
+# move current window to an empty workspace from 11-20
+bindsym $mod+Ctrl+Shift+n exec $script_dir/move_to_empty_workspace
 
 # Move to next/prev workspaces
 bindsym Mod1+Tab workspace next
@@ -388,6 +400,10 @@ bindsym $mod+u border none
 bindsym $mod+n border normal
 bindsym $mod+y border pixel 2
 
+# scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+
 # get all the keyboard shortcuts
 bindsym Mod1+F1 exec $script_dir/keyhint
 
@@ -411,12 +427,15 @@ bindsym $mod+Shift+p exec $script_dir/power-profiles
 # launch apps
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+f exec --no-startup-id firefox
-bindsym $mod+e exec --no-startup-id thunar ~/
+bindsym $mod+Ctrl+e exec --no-startup-id thunar ~/
+bindsym $mod+e exec --no-startup-id alacritty --title Ranger --class Ranger -e ranger ~/
 bindsym $mod+c exec --no-startup-id codium
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
 bindsym Print exec --no-startup-id flameshot gui
 bindsym $mod+Shift+F1 exec --no-startup-id pavucontrol
 bindsym $mod+Mod1+c exec --no-startup-id xfce4-popup-clipman
+bindsym $mod+Shift+a exec --no-startup-id anki
+bindsym $mod+period exec --no-startup-id emote
 
 # variety
 bindsym Mod1+Control+n exec variety -n
@@ -426,37 +445,40 @@ bindsym Mod1+Control+f exec variety -f
 ##### brightness keys #####
 
 # Backlight control
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && $script_dir/brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% && $script_dir/brightness
 
-# bindsym $mod+F5 exec brightnessctl set 5-
-# bindsym $mod+F6 exec brightnessctl set +5
 
 ##### volume keys #####
 
 # Use pactl to adjust volume in PulseAudio.
-# using volume buttons
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $script_dir/vol-tog
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $script_dir/volume-notify
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +5 --max-volume 100 && $script_dir/volume-notify
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $script_dir/mic-tog
 
-# custom keys
-bindsym $mod+F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
-bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3%
-bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3%
-bindsym $mod+F4 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3% && $script_dir/volume-notify
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3% && $script_dir/volume-notify
 
 ##### media keys #####
 
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+F5 exec playerctl position 5-
+bindsym $mod+F5 exec playerctl position 8-
 bindsym $mod+F6 exec playerctl play-pause
-bindsym $mod+F7 exec playerctl position 5+
+bindsym $mod+F7 exec playerctl position 8+
+
+# keys specific to vlc
+
+bindsym $mod+XF86AudioPlay exec playerctl -p vlc play-pause
+bindsym $mod+XF86AudioPause exec playerctl -p vlc play-pause
+
+bindsym $mod+Shift+F5 exec playerctl -p vlc position 8-
+bindsym $mod+Shift+F6 exec playerctl -p vlc play-pause
+bindsym $mod+Shift+F7 exec playerctl -p vlc position 8+
 
 ##### launcher keys #####
 

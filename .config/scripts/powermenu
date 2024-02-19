@@ -119,7 +119,7 @@ menu=(
   [ Suspend]="systemctl suspend"
   [ Hibernate]="systemctl hibernate"
   [ Lock]="light-locker-command -l"
-  [ Logout]="i3-msg exit"
+  [ Logout]="pkill -KILL -u '$USER'"
   [ Cancel]=""
 )
 

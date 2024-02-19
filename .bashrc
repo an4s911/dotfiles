@@ -7,45 +7,92 @@
 
 ### CUSTOM BASH PROMPT - CBP
 
-source /usr/share/git/git-prompt.sh
+if [ -f '/usr/share/git/git-prompt.sh' ]; then . '/usr/share/git/git-prompt.sh'; fi
 
-git_parse() {
-	if [ $(__git_ps1) ]
-	then
-		echo -e "on\e[01;32m$(__git_ps1)\e[0m"
+get_git_branch() {
+	# truncate the spaces from __git_ps1's output
+	local GIT_PS1=$(__git_ps1 "%s")
+	if [ $(__git_ps1) ]; then
+		echo -e "(\e[01;32m$(echo $GIT_PS1)\e[0m)"
 	else
 		echo ""
 	fi
 }
 
-function set_virtualenv() {
-    if test -z "$VIRTUAL_ENV" ; then
-        PYTHON_VIRTUALENV=""
-    else
-        PYTHON_VIRTUALENV="`basename $VIRTUAL_ENV`"
-    fi
+get_python_env() {
+	if test -n "$VIRTUAL_ENV"; then
+		local PYTHON_VIRTUALENV="$(basename $VIRTUAL_ENV)"
+		# if [ -n "$TMUX" ]; then
+		# 	tmux set-environment VIRTUAL_ENV $VIRTUAL_ENV
+		# fi
+	else
+		unset PYTHON_VIRTUALENV
+	fi
+
+	if [ $PYTHON_VIRTUALENV ]; then
+		echo -e "(\e[1;36m$(echo $PYTHON_VIRTUALENV)\e[0m)"
+	else
+		unset PYTHON_VIRTUALENV
+		echo ""
+	fi
 }
 
 function set_bash_prompt() {
-    set_virtualenv
+	PS1=''
 
-    if test -z "$PYTHON_VIRTUALENV" ; then
-        PS1='\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
-    else
-        PS1='(\e[1;36m${PYTHON_VIRTUALENV}\e[0m)\n\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m `git_parse` \n$ '
-    fi
+	# Show python env
+	local PYTHON_ENV=$(get_python_env)
+	if [ -n "$PYTHON_ENV" ]; then
+		PS1="${PYTHON_ENV}\n"
+	fi
+
+	# Default prompt
+	PS1="${PS1}\e[01;31m\u\e[0m at \e[01;33m\h\e[0m in \e[01;34m\w\e[0m"
+
+	# Show git branch
+	local GIT_BRANCH=$(get_git_branch)
+	if [ -n "$GIT_BRANCH" ]; then
+		PS1="${PS1} ${GIT_BRANCH}"
+	fi
+
+	# Add a new line and $ sign at the end
+	PS1="${PS1}\n$ "
 }
 
 PROMPT_COMMAND=set_bash_prompt
 
+# If inside tmux session and .environment file exists, source it
+
+# If environment file exists (this includes additional environent details that is specific
+# to each workspace or project that I am working on)
+if [ -f .environment ]; then
+	source .environment
+fi
+
+if [ -n "$NODEJS" ]; then
+	source $XDG_CONFIG_HOME/scripts/node-setup
+fi
+
+# If VIRTUAL_ENV is set
+if [ -n "$VIRTUAL_ENV" ]; then
+	# If inside tmux, set tmux environment variable
+	if [ -n "$TMUX" ]; then
+		tmux set-environment VIRTUAL_ENV "$VIRTUAL_ENV"
+	fi
+
+	# Activate the virtual environment
+	source $VIRTUAL_ENV/bin/activate
+fi
 
 ### END CBP
 
 
-[[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
+[[ -z "$FUNCNEST" ]] && export FUNCNEST=100 # limits recursive functions, see 'man bash'
 
 # vi mode
 set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 ################################################################################
 ## Some generally useful functions.
@@ -54,29 +101,6 @@ set -o vi
 ## October 2021: removed many obsolete functions. If you still need them, please look at
 ## https://github.com/EndeavourOS-archive/EndeavourOS-archiso/raw/master/airootfs/etc/skel/.bashrc
 
-_open_files_for_editing() {
-    # Open any given document file(s) for editing (or just viewing).
-    # Note1:
-    #    - Do not use for executable files!
-    # Note2:
-    #    - Uses 'mime' bindings, so you may need to use
-    #      e.g. a file manager to make proper file bindings.
-
-    if [ -x /usr/bin/exo-open ] ; then
-        echo "exo-open $@" >&2
-        setsid exo-open "$@" >& /dev/null
-        return
-    fi
-    if [ -x /usr/bin/xdg-open ] ; then
-        for file in "$@" ; do
-            echo "xdg-open $file" >&2
-            setsid xdg-open "$file" >& /dev/null
-        done
-        return
-    fi
-
-    echo "$FUNCNAME: package 'xdg-utils' or 'exo' is required." >&2
-}
 
 #------------------------------------------------------------
 
@@ -88,25 +112,23 @@ _open_files_for_editing() {
 # alias pacdiff=eos-pacdiff
 ################################################################################
 
-
-[ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Git completion setup for aliases
-source /usr/share/git/completion/git-completion.bash
+if [ -f '/usr/share/bash-completion/completions/git' ]; then . '/usr/share/bash-completion/completions/git'; fi
 
 # Bash
 source ~/.bash_aliases
-source ~/.bash_profile
 
-# GitHub cli completion
-eval "$(gh completion -s bash)"
+# Eval github cli completion only if gh is installed, and the command to eval is eval "$(gh completion -s bash)"
+if [ -f '/usr/bin/gh' ]; then eval "$(gh completion -s bash)"; fi
 
 # Auto "cd" when enter just a path
 shopt -s autocd
 
 # If a command is typed and it is available as a package
 # that package will be recommended
-source /usr/share/doc/pkgfile/command-not-found.bash
+if [ -f '/usr/share/doc/pkgfile/command-not-found.bash' ]; then . '/usr/share/doc/pkgfile/command-not-found.bash'; fi
 
 # Prevent overwrite of files refer [ArchWiki](https://wiki.archlinux.org/title/Bash#Prevent_overwrite_of_files)
 set -o noclobber
@@ -124,3 +146,6 @@ bind '"\e[B":history-search-forward'
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind 'set completion-ignore-case on'
+
+# tmux completion
+if [ -f '/usr/share/bash-completion/completions/tmux' ]; then . '/usr/share/bash-completion/completions/tmux'; fi
