@@ -2,7 +2,7 @@
 
 -- vim.keymap.set
 local function map(m, k, v, opts)
-	vim.keymap.set(m, k, v, opts)
+    vim.keymap.set(m, k, v, opts)
 end
 
 -- Tabs
@@ -12,7 +12,7 @@ map("n", "<Leader>tc", "<CMD>tabclose<CR>")
 map("i", "jk", "<ESC>", { desc = "Escape jk", noremap = true, silent = true })
 map("i", "kj", "<ESC>", { desc = "Escape kj", noremap = true, silent = true })
 
--- Delete previous word with Ctrl + Backspace in Insert Mode (Also need to configure the terminal to allow this)
+-- Delete previous word with Ctrl + Backspace in Insert Mode
 -- map("i", "<C-BS>", "<ESC>vbdi", { desc = "Delete previous word", noremap = true, silent = true })
 map("i", "^H", "<C-W>", { desc = "Delete previous word", noremap = true, silent = true })
 
@@ -50,6 +50,15 @@ map("n", "<Leader>wo", "<CMD>wincmd o<CR>", { desc = "Only window", noremap = tr
 map("n", "<Leader>bn", "<CMD>bnext<CR>", { desc = "Next buffer", noremap = true, silent = true })
 map("n", "<Leader>bp", "<CMD>bprevious<CR>", { desc = "Previous buffer", noremap = true, silent = true })
 map("n", "<Leader>bd", "<CMD>bdelete<CR>", { desc = "Delete buffer", noremap = true, silent = true })
+
+-- Switch back and forth between two buffers in insert mode
+map("i", "<C-^>", "<C-O><C-^>", { desc = "Switch back and forth between two buffers", noremap = true, silent = true })
+
+-- Move around windows with Ctrl key
+-- map("n", "<C-h>", "<C-w>h", { desc = "Window left", noremap = true, silent = true })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Window down", noremap = true, silent = true })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Window up", noremap = true, silent = true })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Window right", noremap = true, silent = true })
 
 -- Use the system clipboard
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard", noremap = true, silent = true })

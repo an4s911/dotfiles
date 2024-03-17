@@ -215,7 +215,7 @@ M.load_syntax = function(palette)
             style = "bold",
         },
         VertSplit = {
-            fg = palette.brown,
+            fg = palette.orange,
         },
         LineNr = {
             fg = palette.purple,

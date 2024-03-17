@@ -8,6 +8,15 @@ return {
 		local alpha = require("alpha")
 		local startify = require("alpha.themes.startify")
 
+		startify.section.header.val = {
+			[[     _   _       _               ]],
+			[[    | \ | |_   _(_)_ __ ___      ]],
+			[[    |  \| \ \ / / | '_ ` _ \     ]],
+			[[    | |\  |\ V /| | | | | | |    ]],
+			[[    |_| \_| \_/ |_|_| |_| |_|    ]],
+			[[                                 ]],    
+		}
+
 		startify.section.bottom_buttons.val = {
 			startify.button("q", " 󰅚  Quit NVIM", "<CMD>qa<CR>"),
 			startify.button("rc", "  Nvim Config", "<CMD>e ~/.config/nvim/<CR>"),
