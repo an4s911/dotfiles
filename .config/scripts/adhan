@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-python ~/programming/projects/personal/azan-app/adhan.py
+# Please download the script and store it in a directory and run it using python. Example shown below
+curl https://raw.githubusercontent.com/an4s911/azan-app/refs/heads/main/adhan.py | python -
+
+# Example of running script locally:
+# python3 ~/path/to/script/dir/adhan.py
