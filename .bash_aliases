@@ -1,4 +1,4 @@
-alias ls='ls --color=auto -F'
+alias ls='ls --group-directories-first --color=auto -F'
 alias ll='ls -lavsh --ignore=..' # show long listing of all except "..", show human readable file sizes as well
 alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 alias sl='ls'
@@ -21,7 +21,7 @@ alias nivm="nvim"
 
 alias cd..="cd .."
 
-alias battery-health="awk -v curr='$(cat /sys/class/power_supply/BAT0/energy_full)' -v design='$(cat /sys/class/power_supply/BAT0/energy_full_design)' 'BEGIN { printf \"%.2f%%\n\", (curr/design*100) }'"
+alias battery-health='awk -v curr="$(cat /sys/class/power_supply/BAT0/energy_full)" -v design="$(cat /sys/class/power_supply/BAT0/energy_full_design)" '\''BEGIN { printf "%.2f%%\n", (curr/design*100) }'\'
 
 ### Git Aliases ###
 alias gst="git status"
@@ -38,4 +38,19 @@ alias dft-commit="dft commit -m \"$(date +'Backup at %d %b %Y %R')\""
 
 
 ### Setup nvm
-alias usenvm='export NVM_DIR="$HOME/.config/nvm";[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion";'
+
+# Tmux
+# Custom completion function for tmux attach alias
+_tm_sessions() {
+	# Complete with the options for 'tmux attach'
+	COMPREPLY=($(compgen -W "$(tmux list-sessions | cut -f 1 -d ':')" -- "${COMP_WORDS[COMP_CWORD]}"))
+}
+
+alias tma="tmux attach -t"
+alias tmk="tmux kill-session -t"
+alias tmn="tmux new-session -s"
+alias tml="tmux ls"
+
+# Enable autocompletion for tmux attach alias
+complete -F _tm_sessions tma
+complete -F _tm_sessions tmk

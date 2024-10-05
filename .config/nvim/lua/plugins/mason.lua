@@ -21,7 +21,6 @@ return {
 					"lua_ls",
 					"pylsp",
 					"tailwindcss",
-					"tsserver",
 					"bashls",
 					"emmet_ls",
 				},

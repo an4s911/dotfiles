@@ -1,11 +1,8 @@
 {
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
-    "python.pythonPath": "/usr/bin/python",
     "explorer.confirmDragAndDrop": false,
     "files.associations": {
-        "*.njk": "html"
+        "*.njk": "html",
+        "*.js": "javascript"
     },
     "vim.insertModeKeyBindingsNonRecursive": [
         {
@@ -63,7 +60,7 @@
     "prettier.tabWidth": 4,
     "workbench.startupEditor": "none",
     "editor.fontFamily": "'Ubuntu Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'Font Awesome 6 Free Solid', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.fontSize": 17,
+    "editor.fontSize": 16,
     "editor.minimap.enabled": false,
     "editor.formatOnSave": true,
     "liveServer.settings.CustomBrowser": "firefox:PrivateMode",

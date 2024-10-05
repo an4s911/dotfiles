@@ -21,10 +21,13 @@ get_git_branch() {
 
 get_python_env() {
 	if test -n "$VIRTUAL_ENV"; then
-		local PYTHON_VIRTUALENV="$(basename $VIRTUAL_ENV)"
-		# if [ -n "$TMUX" ]; then
-		# 	tmux set-environment VIRTUAL_ENV $VIRTUAL_ENV
-		# fi
+		#  if PIPENV_ACTIVE is set, we are in pipenv
+		if test -n "$PIPENV_ACTIVE"; then
+			local PROJECT_DIR="$(pipenv --where)"
+			local PYTHON_VIRTUALENV="$(basename $PROJECT_DIR)"
+		else
+			local PYTHON_VIRTUALENV="$(basename $VIRTUAL_ENV)"
+		fi
 	else
 		unset PYTHON_VIRTUALENV
 	fi
@@ -61,28 +64,23 @@ function set_bash_prompt() {
 
 PROMPT_COMMAND=set_bash_prompt
 
-# If inside tmux session and .environment file exists, source it
-
 # If environment file exists (this includes additional environent details that is specific
 # to each workspace or project that I am working on)
-if [ -f .environment ]; then
-	source .environment
-fi
-
-if [ -n "$NODEJS" ]; then
-	source $XDG_CONFIG_HOME/scripts/node-setup
-fi
-
-# If VIRTUAL_ENV is set
-if [ -n "$VIRTUAL_ENV" ]; then
-	# If inside tmux, set tmux environment variable
-	if [ -n "$TMUX" ]; then
+if [ -n $TMUX ]; then
+	if [ -f .tmux-env ]; then
+		source .tmux-env
+	fi
+	if [ -f .venv/bin/activate ]; then
+		source .venv/bin/activate
 		tmux set-environment VIRTUAL_ENV "$VIRTUAL_ENV"
 	fi
-
-	# Activate the virtual environment
-	source $VIRTUAL_ENV/bin/activate
+	if [ $NODE_SOURCE ] || [ -f package.json ] || [ -d node_modules ] || [ -f frontend/package.json ]; then
+		source $XDG_CONFIG_HOME/scripts/node-setup
+	fi
 fi
+
+
+# If VIRTUAL_ENV is set
 
 ### END CBP
 

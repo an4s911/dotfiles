@@ -30,7 +30,17 @@ return {
 		alpha.setup(startify.opts)
 
 		-- Alpha (like startify)
-		vim.api.nvim_set_keymap("n", "<Leader>st", "<CMD>tab Alpha<CR>", { noremap = true, silent = true })
-		vim.api.nvim_set_keymap("n", "<Leader>snt", "<CMD>Alpha<CR>", { noremap = true, silent = true })
+		vim.api.nvim_set_keymap(
+			"n",
+			"<Leader>st",
+			"<CMD>tab Alpha<CR>",
+			{ desc = "Alpha: Open in current tab", noremap = true, silent = true }
+		)
+		vim.api.nvim_set_keymap(
+			"n",
+			"<Leader>snt",
+			"<CMD>Alpha<CR>",
+			{ desc = "Alpha: Open in new tab", noremap = true, silent = true }
+		)
 	end,
 }

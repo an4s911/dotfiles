@@ -2,11 +2,8 @@
 
 -- vim.keymap.set
 local function map(m, k, v, opts)
-    vim.keymap.set(m, k, v, opts)
+	vim.keymap.set(m, k, v, opts)
 end
-
--- Tabs
-map("n", "<Leader>tc", "<CMD>tabclose<CR>")
 
 -- Easy escape
 map("i", "jk", "<ESC>", { desc = "Escape jk", noremap = true, silent = true })

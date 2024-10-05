@@ -22,6 +22,8 @@ return {
 			map("n", "t", api.node.open.tab, opts("Open: New Tab"))
 			map("n", "<BS>", api.tree.change_root_to_parent, opts("Up"))
 			map("n", ".", api.tree.change_root_to_node, opts("CD"))
+			map("n", "<leader>h", api.node.open.horizontal, opts("Open: Horizontal Split"))
+			map("n", ";", api.node.run.cmd, opts("Run Command"))
 		end
 
 		local opts = {
@@ -39,12 +41,25 @@ return {
 			diagnostics = {
 				enable = true,
 			},
+			sync_root_with_cwd = true,
+			renderer = {},
 		}
 
 		nvim_tree.setup(opts)
 
-        -- Open nvim-tree when not in nvim-tree
-		vim.api.nvim_set_keymap("n", "<C-t>", "<CMD>NvimTreeFocus<CR>", { noremap = true, silent = true })
+		-- Open nvim-tree when not in nvim-tree
+		vim.api.nvim_set_keymap(
+			"n",
+			"<C-t>",
+			"<CMD>NvimTreeFocus<CR>",
+			{ noremap = true, silent = true, desc = "Toggle NvimTree" }
+		)
+		vim.api.nvim_set_keymap(
+			"n",
+			"<C-s>",
+			"<CMD>NvimTreeClose<CR>",
+			{ noremap = true, silent = true, desc = "Close NvimTree" }
+		)
 	end,
 	dependencies = {
 		{
